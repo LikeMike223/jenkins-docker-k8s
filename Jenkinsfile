@@ -7,14 +7,14 @@ pipeline {
 
             stage('Build Docker Image'){
                     steps{
-                           sh "sudo  docker build  .  -t  likemike123/nodeapp:${DOCKER_TAG}"
+                           sh "sudo  docker build  .  -t  likemike223/nodeapp:${DOCKER_TAG}"
                     }
              }
              stage('DockerHub Push'){
                      steps{
                            withCredentials([string(credentialsId: 'DOCKER_HUB_PASSWORD', variable: 'dockerHubPwd')]){
-                                 sh "docker login -u likemike123 -p ${dockerHubPwd}"
-                                 sh "docker push docker.io/likemike123/nodeapp:${DOCKER_TAG}"
+                                 sh "docker login -u likemike223 -p ${dockerHubPwd}"
+                                 sh "docker push docker.io/likemike223/nodeapp:${DOCKER_TAG}"
                                  }
                            }
              }
@@ -41,4 +41,3 @@ def  getDockerTag() {
   def tag = sh  script: 'git rev-parse HEAD', returnStdout: true
   return  tag
 }
-
