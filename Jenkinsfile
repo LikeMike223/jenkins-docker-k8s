@@ -9,6 +9,14 @@ pipeline {
                            sh "sudo  docker build  .  -t  likemike123/nodeapp:${DOCKER_TAG}"
                     }
              }
+             stage('DockerHub Push'){
+                     steps{
+                          withCredentials([string(credentialsId: 'DOCKER_HUB_PASSWORD', variable: 'dockerHubPwd')]){
+                                 sh "docker login -u likemike123 -p ${dockerHubPwd}"
+                                 sh "docker push docker.io/likemike123/nodeapp:${DOCKER_TAG}"
+                                 }
+                           }
+             }
       }
 
 }
